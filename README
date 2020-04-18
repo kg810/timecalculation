@@ -1,0 +1,64 @@
+Questions:
+
+# 时间计算
+请在linux下g++(c++11或以上版本)，cmake来构建工程
+
+## 一、计算到某个日期的小时数
+比如`date`是`2020-05-06`，返回现在（精确到秒）到该天晚上23点有多少小时(四舍五入)。将`hour.cpp`编译成动态库`hour.so`
+```
+// hour.cpp
+void GetHours(const std::string &date) {
+    // auto res = xxx
+        std::cout << __func__ << ": " << res << std::endl;
+        
+}
+```
+
+## 二、统计程序执行时间
+请实现`SlowFunc`, 让其等待1234us的概率为1/2， 等待1234*2us的概率为1/4，...,等待1234 * n us的概率为1/(2 * n). 将`slow.cpp`编译成静态库`slow.a`
+```
+// slow.cpp
+void SlowFunc() {
+    // TODO
+    
+}
+```
+
+返回`SlowFunc()`执行一次的时间，精确到微秒。将`cost.cpp`编译成动态库`cost.so`
+```
+// cost.cpp
+void SlowFunc();
+void GetCost(const std::string &date) {
+    // auto res = xxx
+        std::cout << __func__ << ":" << date << ", cost: " << res;
+        
+}
+```
+
+## 三、根据用户输入选择执行的程序
+
+主程序接收一个参数，根据参数选择`dlopen`执行动态库中的函数；
+```
+// main.cpp
+int main(int argc, char *argv[]) {
+    SlowFunc();
+    if (argc != 2) {
+            return 1;
+                
+    } else {
+        if (strcmp(argv[1], "h") == 0) {
+                    // GetHours 
+                                // dlopen("hour.so")
+                                            return 0;
+                                                    
+        } else if (strcmp(argv[1], "c") == 0) {
+                    // GetCost
+                                // dlopen("cost.so")
+                                            return 0;
+                                                    
+        }
+            
+    }
+        return 1;
+        
+}
